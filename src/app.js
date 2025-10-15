@@ -9,12 +9,15 @@ const notFound = require('./infrastructure/middlewares/not-found');
 const requestLogger = require('./infrastructure/middlewares/request-logger');
 
 const routes = require('./interfaces/http/routes/index.routes');
+const requestId = require('./infrastructure/middlewares/request-id');
+
 
 const app = express();
 
 // seguridad & logs
 app.use(...security());
 app.use(requestLogger);
+app.use(requestId);
 
 // vistas
 app.set('views', path.join(__dirname, 'views'));

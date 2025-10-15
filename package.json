@@ -1,0 +1,36 @@
+{
+  "name": "dy-api-utils",
+  "version": "1.0.0",
+  "description": "API de utilidades y vistas (Clean Architecture) - Dyshopnow",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "tailwind:watch": "npx tailwindcss -i ./public/css/styles.css -o ./public/css/output.css --watch",
+    "dev:local": "concurrently \"npm run tailwind:watch\" \"npm run dev\"",
+    "tailwind:build": "NODE_ENV=production npx tailwindcss -i ./public/css/styles.css -o ./public/css/output.css --minify"
+  },
+  "dependencies": {
+    "axios": "^1.12.2",
+    "axios-retry": "^4.5.0",
+    "compression": "^1.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "express-static-gzip": "^3.0.0",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "nocache": "^4.0.0",
+    "node-cache": "^5.1.2",
+    "winston": "^3.14.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.2.0",
+    "nodemon": "^3.1.10",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17"
+  }
+}

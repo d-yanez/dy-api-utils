@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Stock <%= vm.sku %> - Dy API Utils</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color: #222; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 16px; max-width: 900px; }
+    .header { display: flex; gap: 16px; align-items: center; }
+    img.thumb { width: 110px; height: 110px; object-fit: cover; border-radius: 10px; border: 1px solid #ddd; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { border-top: 1px solid #eee; padding: 8px 10px; text-align: left; }
+    th { background: #fafafa; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .muted { color: #666; }
+    .total { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <% if (vm.item && vm.item.image) { %>
+        <img class="thumb" src="<%= vm.item.image %>" referrerpolicy="no-referrer" crossorigin="anonymous" alt="item">
+
+      <% } %>
+      <div>
+        <h1 style="margin: 0 0 6px 0;"><%= (vm.item && vm.item.title) || ('MLC' + vm.sku) %></h1>
+        <div class="muted">SKU: <span class="mono"><%= vm.sku %></span></div>
+        <div>Stock total: <span class="total"><%= vm.total %></span></div>
+        <% if (vm.item && vm.item.url) { %>
+          <div style="margin-top:6px;">
+            <a href="<%= vm.item.url %>" target="_blank">Ver publicación</a>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>SKU</th>
+          <th>Ubicación</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (!vm.rows || vm.rows.length === 0) { %>
+          <tr><td colspan="3" class="muted">Sin datos</td></tr>
+        <% } else { %>
+          <% vm.rows.forEach(r => { %>
+            <tr>
+              <td class="mono"><%= r.sku %></td>
+              <td><%= r.location %></td>
+              <td><%= r.stock %></td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

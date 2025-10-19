@@ -49,7 +49,7 @@ build/
 
 # Optional: ignore Docker artifacts if using
 docker-compose.override.yml
-Dockerfile*
+
 
 # Optional: logs from Cloud Build or local deploy
 .cloudbuild/

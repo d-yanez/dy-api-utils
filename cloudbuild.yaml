@@ -1,43 +1,44 @@
 options:
   logging: CLOUD_LOGGING_ONLY
 
-substitutions:
-  # Cambia si quieres otra región
-  _REGION: "us-central1"
-  _SERVICE: "dy-api-utils"
-  _IMAGE: "gcr.io/$PROJECT_ID/dy-api-utils:$SHORT_SHA"
-
 steps:
   # 🔨 Build Docker image
-  - id: "Build image"
-    name: "gcr.io/cloud-builders/docker"
-    args: ["build", "--platform=linux/amd64", "-t", "${_IMAGE}", "."]
+  - id: 'Build image'
+    name: 'gcr.io/cloud-builders/docker'
+    args:
+      - build
+      - --platform=linux/amd64
+      - -t
+      - "gcr.io/$PROJECT_ID/dy-api-utils:$SHORT_SHA"
+      - .
 
   # 📤 Push Docker image
-  - id: "Push image"
-    name: "gcr.io/cloud-builders/docker"
-    args: ["push", "${_IMAGE}"]
+  - id: 'Push image'
+    name: 'gcr.io/cloud-builders/docker'
+    args:
+      - push
+      - "gcr.io/$PROJECT_ID/dy-api-utils:$SHORT_SHA"
 
   # 🚀 Deploy to Cloud Run
-  - id: "Deploy to Cloud Run"
-    name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+  - id: 'Deploy to Cloud Run'
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: bash
     args:
       - -c
       - |
-        gcloud run deploy ${_SERVICE} \
-          --image ${_IMAGE} \
-          --region ${_REGION} \
-          --platform managed \
-          --service-account sa-dy-api-utils@${PROJECT_ID}.iam.gserviceaccount.com \
+        gcloud run deploy dy-api-utils \
+          --image gcr.io/$PROJECT_ID/dy-api-utils:$SHORT_SHA \
+          --region=us-central1 \
+          --platform=managed \
+          --service-account=sa-dy-api-utils@${PROJECT_ID}.iam.gserviceaccount.com \
           --allow-unauthenticated \
-          --port 8080 \
-          --timeout 300s \
-          --memory 256Mi \
-          --cpu 0.5 \
-          --concurrency 1 \
-          --min-instances 0 \
-          --max-instances 1
+          --port=8080 \
+          --timeout=300s \
+          --memory=256Mi \
+          --cpu=0.5 \
+          --concurrency=1 \
+          --min-instances=0 \
+          --max-instances=1
 
 images:
-  - "${_IMAGE}"
+  - "gcr.io/$PROJECT_ID/dy-api-utils:$SHORT_SHA"

@@ -11,7 +11,6 @@ const requestLogger = require('./infrastructure/middlewares/request-logger');
 const routes = require('./interfaces/http/routes/index.routes');
 const requestId = require('./infrastructure/middlewares/request-id');
 
-
 const app = express();
 
 // seguridad & logs

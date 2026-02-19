@@ -15,6 +15,7 @@ const app = express();
 
 // seguridad & logs
 app.use(...security());
+app.use(express.json({ limit: '1mb' }));
 app.use(requestLogger);
 app.use(requestId);
 

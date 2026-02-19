@@ -12,6 +12,17 @@ const config = {
     apiKey: process.env.ML_API_KEY,
     accountId: process.env.ML_ACCOUNT_ID
   },
+  enviosParaHoy: {
+    recipient: process.env.ENVIOSPARAHOY_RECIPIENT || 'dyanez@dyshopnow.cl',
+    from: process.env.ENVIOSPARAHOY_FROM || process.env.SMTP_USER,
+    smtp: {
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT || 587),
+      secure: String(process.env.SMTP_SECURE || 'false').toLowerCase() === 'true',
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS
+    }
+  },
   http: {
     timeoutMs: 7000,
     retries: 2

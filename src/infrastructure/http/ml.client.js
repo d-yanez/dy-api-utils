@@ -36,7 +36,9 @@ async function getMlItemBySku(sku) {
     id: data.id,
     title: data.title,
     image,
-    url: data.permalink || null
+    url: data.permalink || null,
+    itemRelations: Array.isArray(data.item_relations) ? data.item_relations : [],
+    siteId: data.site_id || null
   };
 }
 

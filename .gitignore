@@ -53,3 +53,4 @@ docker-compose.override.yml
 
 # Optional: logs from Cloud Build or local deploy
 .cloudbuild/
+.atl/
